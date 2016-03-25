@@ -1,0 +1,15 @@
+--- a/addons/skin.confluence/720p/Home.xml	2016-02-20 16:21:19.000000000 +0100
++++ b/addons/skin.confluence/720p/Home.xml	2016-03-17 21:26:57.727697573 +0100
+@@ -987,6 +987,12 @@
+ 						<thumb>-</thumb>
+ 						<visible>!Skin.HasSetting(HomeMenuNoProgramsButton)</visible>
+ 					</item>
++					<item id="14">
++						<label>EMULATORS</label>
++						<onclick>XBMC.System.Exec(/usr/bin/emulationstation.sh)</onclick>
++						<icon>-</icon>
++						<thumb>-</thumb>
++					</item>
+ 					<item id="6">
+ 						<label>31958</label>
+ 						<onclick>PlayDVD()</onclick>

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. /etc/profile
+cd /storage/emulators/uae4arm
+
+if [ ! -L data ]; then
+  ln -s /usr/share/uae4arm/data .
+fi
+
+if [ ! -f conf/uaeconfig.uae ]; then
+  cp /usr/share/uae4arm/uaeconfig.uae conf/
+fi
+
+[ -z $ES ] && systemctl stop kodi
+tvservice -e "CEA 31"
+uae4arm "$@" > /tmp/uae4arm.log 2>&1
+tvservice -e "CEA 16"
+sleep 1
+[ -z $ES ] && systemctl start kodi

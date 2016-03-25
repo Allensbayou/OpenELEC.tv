@@ -1,0 +1,16 @@
+--- a/menu/menu_displaylist.c	2016-03-16 00:17:48.079114712 +0100
++++ b/menu/menu_displaylist.c	2016-03-16 00:17:58.742292612 +0100
+@@ -2263,13 +2263,6 @@
+ {
+ #ifdef HAVE_NETWORKING
+ 
+-#ifdef HAVE_LAKKA
+-   menu_entries_push(info->list,
+-         menu_hash_to_str(MENU_LABEL_VALUE_UPDATE_LAKKA),
+-         menu_hash_to_str(MENU_LABEL_UPDATE_LAKKA),
+-         MENU_SETTING_ACTION, 0, 0);
+-#endif
+-
+    menu_entries_push(info->list,
+          menu_hash_to_str(MENU_LABEL_VALUE_CORE_UPDATER_LIST),
+          menu_hash_to_str(MENU_LABEL_CORE_UPDATER_LIST),

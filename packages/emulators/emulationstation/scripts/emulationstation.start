@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. /etc/profile
+
+export DISPLAY=:0.0
+export SDL_AUDIODRIVER=alsa
+
+if [ ! -d /storage/.config/emulationstation ]; then
+  mkdir /storage/.config/emulationstation
+  cp /usr/share/emulationstation/* /storage/.emulationstation
+fi
+
+systemctl stop kodi
+if [ ! -f /storage/.config/emulation/es_gamelist ]; then
+  emulationstation --no-splash --ignore-gamelist "$@" > /tmp/emulationstation.log 2>&1
+else
+  emulationstation --no-splash "$@" > /tmp/emulationstation.log 2>&1
+fi
+systemctl start kodi

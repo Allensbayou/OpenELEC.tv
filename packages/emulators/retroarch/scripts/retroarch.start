@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. /etc/profile
+
+export SDL_MOUSE_RELATIVE=0
+export FB_MULTI_BUFFER=2
+export DISPLAY=:0.0
+
+[ -z $ES ] && systemctl stop kodi
+/usr/bin/retroarch "$@" > /tmp/retroarch.log 2>&1
+[ -z $ES ] && systemctl start kodi

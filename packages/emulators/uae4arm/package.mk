@@ -37,7 +37,9 @@ PKG_AUTORECONF="no"
 pre_configure_target() {
   strip_lto
 }
-  export CPU_FLAGS="-mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard"
+
+[ "$PROJECT" = "RPi" ] && export CPU_FLAGS="-mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard"
+[ "$PROJECT" = "RPi2" ] && export CPU_FLAGS="-mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard"
 
 make_target() {
   SYSROOT_PREFIX=$SYSROOT_PREFIX CPU_CFLAGS=$TARGET_CFLAGS PLATFORM=gles make

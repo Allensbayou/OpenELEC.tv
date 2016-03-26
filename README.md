@@ -1,3 +1,37 @@
+A fork of OpenELEC to add RetroArch and uae4arm, with Emulationstation as a frontend. This was created with the Raspberry Pi in mind,
+but it should work for Generic builds as well.
+
+Build like this:
+
+```
+PROJECT=RPi2 DISTRO=OpenELEC make -j2 image
+```
+
+** Notes on Emulationstation setup **
+
+Gamelists are disabled, if you want to enable them and use scraping run this command in CLI: 
+
+```
+# touch /storage/.config/emulation/es_gamelist". 
+```
+
+Out of the box Emulationstation will look for roms in /storage/roms/(amiga|mame|n64|psx|psp|snes|nes). Configured input controllers are 
+DS4 (bluetooth) and keyboard. Configuration is in /storage/.config/emulationstation. The keyboard layout is as follows:
+
+Navigation = Arrow keys
+A = Enter
+B = Backspace
+Page up = ,
+Page down = .
+Start = rctrl
+Select = ralt
+
+** uae4arm keyboard controls **
+
+emulator menu = lctrl
+
+Original README.md follows.
+
 [OpenELEC](http://www.openelec.tv)
 
 # OpenELEC - Open Embedded Linux Entertainment Center

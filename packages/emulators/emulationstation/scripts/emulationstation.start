@@ -7,7 +7,7 @@ export SDL_AUDIODRIVER=alsa
 
 if [ ! -d /storage/.config/emulationstation ]; then
   mkdir /storage/.config/emulationstation
-  cp /usr/share/emulationstation/* /storage/.emulationstation
+  cp /usr/share/emulationstation/* /storage/.config/emulationstation
 fi
 
 systemctl stop kodi

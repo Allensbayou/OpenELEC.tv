@@ -77,11 +77,13 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-vg \
                            $RETROARCH_NEON \
                            --enable-fbo \
                            --enable-zlib \
+			   --host=$TARGET_HOST \
                            --enable-freetype"
 
 pre_configure_target() {
   strip_lto # workaround for https://github.com/libretro/RetroArch/issues/1078
   cd $ROOT/$PKG_BUILD
+  export PKG_CONF_PATH=$ROOT/$BUILD/toolchain/bin/pkg-config
 }
 
 make_target() {

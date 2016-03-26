@@ -7,5 +7,7 @@ export FB_MULTI_BUFFER=2
 export DISPLAY=:0.0
 
 [ -z $ES ] && systemctl stop kodi
+pidof Xorg > /dev/null && chvt 2
 /usr/bin/retroarch "$@" > /tmp/retroarch.log 2>&1
+pidof Xorg > /dev/null && chvt 1
 [ -z $ES ] && systemctl start kodi

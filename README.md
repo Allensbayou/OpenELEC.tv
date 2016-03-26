@@ -7,7 +7,7 @@ Build like this:
 PROJECT=RPi2 DISTRO=OpenELEC make -j2 image
 ```
 
-** Notes on Emulationstation setup **
+**Notes on Emulationstation setup**
 
 Gamelists are disabled, if you want to enable them and use scraping run this command in CLI: 
 
@@ -26,7 +26,7 @@ Page down = .
 Start = rctrl
 Select = ralt
 
-** uae4arm keyboard controls **
+**uae4arm keyboard controls**
 
 emulator menu = lctrl
 

@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="emulationstation"
-PKG_VERSION="93f6e11"
+PKG_VERSION="c6bfeb8"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -31,10 +31,6 @@ PKG_SHORTDESC="Emulationstation emulator frontend"
 
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
-
-pre_configure_target() {
- strip_lto
-}
 
 configure_target() {
   if [ "$KODIPLAYER_DRIVER" = "bcm2835-firmware" ]; then

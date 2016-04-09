@@ -19,11 +19,11 @@
 ################################################################################
 
 PKG_NAME="mupen64plus"
-PKG_VERSION="dd18ca3"
+PKG_VERSION="ce3bcfa"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
-PKG_SITE="https://github.com/libretro/mupen64plus-libretro.git"
+PKG_SITE="https://github.com/libretro/mupen64plus-libretro"
 PKG_GIT_URL="https://github.com/libretro/mupen64plus-libretro.git"
 PKG_GIT_BRANCH="master"
 PKG_DEPENDS_TARGET="toolchain"
@@ -47,8 +47,8 @@ make_target() {
     DYNAREC=x86
   fi
 
-  if [ "$PROJECT" == "RPi" ]; then
-    make platform=rpi
+  if [ "$PROJECT" == "RPi2" ]; then
+    make platform=rpi2
   elif [[ "$TARGET_FPU" =~ "neon" ]]; then
     CFLAGS="$CFLAGS -DGL_BGRA_EXT=0x80E1" # Fix build for platforms where GL_BGRA_EXT is not defined
     make platform=armv-gles-neon

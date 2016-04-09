@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ ! -d /storage/.vice ]; then
+  mkdir /storage/.vice
+  cp /usr/share/vice/* /storage/.vice
+fi
+
+[ -z $ES ] && systemctl stop kodi
+tvservice -e "CEA 31"
+x64 -mouse -sounddev alsa -joydev1 4 -joydev2 4 "$@" > /tmp/x64.log 2>&1
+tvservice -e "CEA 16"
+sleep 1
+[ -z $ES ] && systemctl start kodi

@@ -18,19 +18,29 @@
 #  http://www.gnu.org/copyleft/gpl.html
 ################################################################################
 
-PKG_NAME="RPi2"
-PKG_VERSION=""
+PKG_NAME="vice"
+PKG_VERSION="2.4.26"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/lakkatv/Lakka"
-PKG_URL=""
-PKG_DEPENDS_TARGET="retroarch ppsspp snes9x-next pcsx_rearmed mupen64plus prboom nestopia mame2003 uae4arm emulationstation vice"
+PKG_LICENSE="GPLv3"
+PKG_SITE="http://vice-emu.sourceforge.net/"
+PKG_URL="https://sourceforge.net/projects/vice-emu/files/development-releases/vice-$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain alsa-lib SDL libpng giflib zlib libvorbis"
 PKG_PRIORITY="optional"
-PKG_SECTION="virtual"
-PKG_SHORTDESC="Lakka metapackage for RPi 2"
-PKG_LONGDESC=""
+PKG_SECTION="emulators"
+PKG_SHORTDESC="vice emulator"
 
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
+PKG_CONFIGURE_OPTS_TARGET="ac_cv_func_SDL_NumJoysticks=yes --prefix=/usr \
+			   --disable-option-checking \
+			   --enable-native-tools \
+                           --enable-sdlui \
+			   --without-oss \
+			   --without-pulse"
+
+post_install() {
+  mkdir -p $INSTALL/usr/share/vice
+  cp $PKG_DIR/scripts/* $INSTALL/usr/bin
+ }

@@ -103,6 +103,8 @@
 # decode_DTS=0x00000000
 # decode_DDP=0x00000000
 
+dtparam=audio=on
+
 ################################################################################
 # End of default configuration
 # all values below this line were inserted from config.txt.bk (your old config)

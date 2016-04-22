@@ -33,6 +33,12 @@ PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
 PKG_CONFIGURE_OPTS_HOST="--enable-static --disable-shared --disable-rpath --with-gnu-ld"
+PKG_CONFIGURE_OPTS_TARGET="--disable-static --enable-shared --disable-rpath --with-gnu-ld"
+
+pre_configure_target() {
+  export ac_cv_func_realloc_0_nonnull=yes
+  export ac_cv_func_malloc_0_nonnull=yes
+}
 
 post_makeinstall_host() {
   cat > $ROOT/$TOOLCHAIN/bin/lex << "EOF"

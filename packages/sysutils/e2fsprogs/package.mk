@@ -79,16 +79,6 @@ pre_make_host() {
 post_makeinstall_target() {
   make -C lib/et DESTDIR=$SYSROOT_PREFIX install
   make -C lib/ext2fs DESTDIR=$SYSROOT_PREFIX install
-  rm -rf $INSTALL/sbin/badblocks
-  rm -rf $INSTALL/sbin/blkid
-  rm -rf $INSTALL/sbin/dumpe2fs
-  rm -rf $INSTALL/sbin/e2freefrag
-  rm -rf $INSTALL/sbin/e2undo
-  rm -rf $INSTALL/sbin/e4defrag
-  rm -rf $INSTALL/sbin/filefrag
-  rm -rf $INSTALL/sbin/fsck
-  rm -rf $INSTALL/sbin/logsave
-  rm -rf $INSTALL/sbin/mklost+found
 }
 
 makeinstall_init() {

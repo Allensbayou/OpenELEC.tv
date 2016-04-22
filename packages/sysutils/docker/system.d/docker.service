@@ -7,7 +7,8 @@ ConditionPathExists=!/storage/.cache/services/docker.disabled
 
 [Service]
 Type=notify
-ExecStart=/usr/sbin/docker daemon -H fd:// --graph=/storage/.docker --storage-driver=overlay
+EnvironmentFile=/storage/.config/docker/docker.conf
+ExecStart=/usr/sbin/docker daemon -H fd:// $DOCKER_DAEMON_OPTS $DOCKER_STORAGE_OPTS
 MountFlags=slave
 LimitNOFILE=1048576
 LimitNPROC=1048576

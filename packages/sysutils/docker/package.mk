@@ -24,7 +24,7 @@ PKG_PROJECTS="Generic RPi RPi2"
 PKG_LICENSE="ASL"
 PKG_SITE="http://www.docker.com/"
 PKG_URL="https://github.com/docker/docker/archive/v${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain sqlite go:host containerd runc"
+PKG_DEPENDS_TARGET="toolchain sqlite go:host containerd runc btrfs-progs"
 PKG_PRIORITY="optional"
 PKG_SECTION="service/system"
 PKG_SHORTDESC="Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere."
@@ -40,8 +40,7 @@ unpack() {
 configure_target() {
   export DOCKER_BUILDTAGS="daemon \
                            exclude_graphdriver_devicemapper \
-                           exclude_graphdriver_aufs \
-                           exclude_graphdriver_btrfs"
+                           exclude_graphdriver_aufs"
 
   case $TARGET_ARCH in
     x86_64)

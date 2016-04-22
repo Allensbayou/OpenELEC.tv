@@ -1,3 +1,68 @@
+**A fork of OpenELEC with the following features:**
+* OpenELEC 8.0 git
+* Kodi 17 Krypton
+* Docker 1.11.1
+* Emulationstation (Herdinger fork) + sselph scraper
+* RetroArch git
+* VICE 2.4.24
+* UAE4ARM/FS-UAE git
+* F2FS/BTRFS/XFS filesystem support
+* RPi3 Bluetooth working out of the box
+* UNFS3 NFS server
+* Custom splash
+
+**Build command**
+```
+PROJECT=RPi2 DISTRO=OpenELEC make image
+```
+
+**Reformat /storage to F2FS on next boot**
+```
+# touch /storage/.please_reformat_f2fs
+```
+
+**Automatically backup/restore while reformatting:**
+```
+# touch /storage/.backup
+```
+
+**Emulationstation arguments in /storage/.config/emulationstation/emulationstation.conf**
+```
+EMULATIONSTATION_OPTS="--ignore-gamelist --no-splash"
+```
+
+**Docker arguments in /storage/.config/docker/docker.conf**
+```
+DOCKER_DAEMON_OPTS="--graph=/storage/.docker"
+DOCKER_STORAGE_OPTS="--storage-driver=overlay"
+```
+
+**Out of the box Emulationstation will look for roms in /storage/roms/(amiga|mame|n64|psx|psp|snes|nes). Configured input controllers are 
+DS4 (bluetooth) and keyboard. Configuration is in /storage/.config/emulationstation. The keyboard layout is as follows:**
+
+```
+Navigation = Arrow keys
+A = Enter
+B = Backspace
+Page up = ,
+Page down = .
+Start = rctrl
+Select = ralt
+```
+
+**Keyboard buttons in different apps**
+```
+Kodi shutdown menu = S
+Kodi context menu = C
+Emulationstation menu = RCTRL
+uae4arm menu = F12
+uae4arm joystick/mouse switch = F11
+VICE menu = F12
+Retroarch menu = F1
+```
+
+Original README.md below.
+
 [OpenELEC](http://www.openelec.tv)
 
 # OpenELEC - Open Embedded Linux Entertainment Center

@@ -16,46 +16,46 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="zlib"
-PKG_VERSION="1.2.8"
+PKG_NAME="xfsprogs"
+PKG_VERSION="53cefc4"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_LICENSE="OSS"
-PKG_SITE="http://www.zlib.net"
-PKG_URL="http://zlib.net/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_DEPENDS_HOST=""
-PKG_DEPENDS_INIT="zlib"
+PKG_LICENSE="GPL"
+PKG_SITE="http://www.xfs.org"
+PKG_GIT_URL="git://git.kernel.org/pub/scm/fs/xfs/xfsprogs-dev.git"
+PKG_GIT_BRANCH="master"
+PKG_DEPENDS_TARGET="toolchain util-linux"
+PKG_DEPENDS_INIT="xfsprogs"
 PKG_PRIORITY="optional"
-PKG_SECTION="compress"
-PKG_SHORTDESC="zlib: A general purpose (ZIP) data compression library"
-PKG_LONGDESC="zlib is a general purpose data compression library. All the code is thread safe. The data format used by the zlib library is described by RFCs (Request for Comments) 1950 to 1952 in the files ftp://ds.internic.net/rfc/rfc1950.txt (zlib format), rfc1951.txt (deflate format) and rfc1952.txt (gzip format)."
-
+PKG_SECTION="tools"
+PKG_SHORTDESC="xfsprogs: Utilities for use with the xfs filesystem"
 PKG_IS_ADDON="no"
+
 PKG_AUTORECONF="no"
 
-TARGET_CONFIGURE_OPTS="--prefix=/usr"
-HOST_CONFIGURE_OPTS="--prefix=$ROOT/$TOOLCHAIN"
+PKG_CONFIGURE_OPTS_TARGET="--enable-shared=no --with-gnu-ld --host=$TARGET_NAME --build=$HOST_NAME"
 
-pre_build_target() {
-  mkdir -p $PKG_BUILD/.$TARGET_NAME
-  cp -RP $PKG_BUILD/* $PKG_BUILD/.$TARGET_NAME
-}
-
-pre_build_host() {
-  mkdir -p $PKG_BUILD/.$HOST_NAME
-  cp -RP $PKG_BUILD/* $PKG_BUILD/.$HOST_NAME
+pre_configure_target() {
+  cd $ROOT/$PKG_BUILD
+  rm -rf $TARGET_NAME
+  make configure
 }
 
 configure_init() {
- : # reuse target
+  : # reuse target
 }
 
 make_init() {
- : # reuse target
+  : # reuse target
+}
+
+post_makeinstall_target() {
+  rm -rf $INSTALL/usr/include
 }
 
 makeinstall_init() {
-  mkdir -p $INSTALL/lib
-  cp -a ../.install_pkg/usr/lib/* $INSTALL/lib
+  mkdir -p $INSTALL/sbin
+  cp ../.install_pkg/sbin/xfs_repair $INSTALL/sbin
+  cp ../.install_pkg/sbin/fsck.xfs $INSTALL/sbin
+  cp ../.install_pkg/sbin/mkfs.xfs $INSTALL/sbin
 }

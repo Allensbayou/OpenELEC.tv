@@ -59,6 +59,10 @@
   # SquashFS compression method (gzip / lzo / xz)
     SQUASHFS_COMPRESSION="gzip"
 
+  # Extra filesystem support
+    F2FS_SUPPORT="yes"
+    BTRFS_SUPPORT="yes"
+    XFS_SUPPORT="yes"
 
 ################################################################################
 # setup project defaults

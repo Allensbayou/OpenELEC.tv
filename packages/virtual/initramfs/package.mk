@@ -23,7 +23,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.openelec.tv"
 PKG_URL=""
-PKG_DEPENDS_TARGET="toolchain libc:init busybox:init linux:init plymouth-lite:init util-linux:init e2fsprogs:init dosfstools:init"
+PKG_DEPENDS_TARGET="toolchain libc:init busybox:init linux:init plymouth-lite:init util-linux:init e2fsprogs:init dosfstools:init zlib:init"
 PKG_PRIORITY="optional"
 PKG_SECTION="virtual"
 PKG_SHORTDESC="initramfs: Metapackage for installing initramfs"
@@ -41,6 +41,21 @@ if [ "$INITRAMFS_PARTED_SUPPORT" = yes ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET e2fsprogs:init"
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET parted:init"
 fi
+
+# F2FS support
+  if [ "$F2FS_SUPPORT" = "yes" ] ; then
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET f2fs-tools:init"
+  fi
+
+# BTRFS support
+  if [ "$BTRFS_SUPPORT" = "yes" ] ; then
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET btrfs-progs:init"
+  fi
+
+# XFS support
+  if [ "$XFS_SUPPORT" = "yes" ] ; then
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET xfsprogs:init"
+  fi
 
 post_install() {
   cd $ROOT/$BUILD/initramfs

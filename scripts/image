@@ -41,7 +41,7 @@ if [ "$OPENELEC_VERSION" = devel ]; then
   GIT_HASH=$(git rev-parse HEAD)
   GIT_ABBREV=$(git log -1 --pretty=format:%h)
   DEVEL_VERSION=$OPENELEC_VERSION
-  OPENELEC_VERSION=$OPENELEC_VERSION-$BUILD_DATE-r$GIT_BUILD-g$GIT_ABBREV
+  OPENELEC_VERSION=$OPENELEC_VERSION-$GIT_ABBREV
 fi
 
 TARGET_VERSION="$PROJECT.$TARGET_ARCH-$OPENELEC_VERSION"
@@ -135,6 +135,9 @@ fi
   $SCRIPTS/install corefonts
   $SCRIPTS/install network
 
+# NFS support
+  [ ! "$NFS_SERVER" = "no" ] && $SCRIPTS/install unfs3
+
 # Graphic support
   [ ! "$DISPLAYSERVER" = "no" ] && $SCRIPTS/install $DISPLAYSERVER
 
@@ -168,6 +171,13 @@ fi
 
 # OEM packages
   [ "$OEM_SUPPORT" = "yes" ] && $SCRIPTS/install oem
+  
+  if [ -n "$ADDON_ENABLE" ]; then
+    KODI_ADDON_MANIFEST="$ROOT/$BUILD/image/system/usr/share/kodi/system/addon-manifest.xml"
+    for ADDON_ID in $ADDON_ENABLE; do
+      xmlstarlet ed -L --subnode "/addons" -t elem -n "addon" -v "$ADDON_ID" $KODI_ADDON_MANIFEST
+    done
+  fi
 
 # copy project related files to filesystem
   if [ -d "$PROJECT_DIR/$PROJECT/filesystem" ]; then
@@ -358,6 +368,10 @@ fi
           EXTRA_CMDLINE="$EXTRA_CMDLINE" \
           $SCRIPTS/mkimage
       fi
+
+    # clean up target directory
+      rm -rf $TARGET_IMG/$IMAGE_NAME.kernel
+      rm -rf $TARGET_IMG/$IMAGE_NAME.system
 
     # create WeTek Play (Amlogic) ZIP update and auto-install packages if requested
       if [ "$1" = "amlpkg" ]; then

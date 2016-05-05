@@ -34,6 +34,8 @@ PKG_SHORTDESC="UNFS3 server"
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="yes"
 
+MAKEFLAGS="-j1"
+
 post_install() {
   cp $PKG_DIR/config/exports $INSTALL/usr/config
   enable_service unfsd.service
